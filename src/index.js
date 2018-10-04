@@ -1,3 +1,6 @@
+import 'source-map-support/register';
+import API from 'lib/api';
+
 /* Include dependencies */
 import { UserFactory } from 'factories';
 
@@ -5,7 +8,9 @@ import { UserFactory } from 'factories';
 import Routes from 'routes';
 
 /* Run any loading required */
-Routes.load();
+Routes.load( API );
+
+API.start();
 
 /* Create any default users */
 UserFactory.createDefaultUsers();

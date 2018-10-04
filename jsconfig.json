@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+      "target": "ES6",
+      "module": "commonjs",
+      "allowSyntheticDefaultImports": true,
+      "baseUrl": "./src",
+      "paths": {
+        "constants/*": ["constants/*"],
+        "config/*": ["config/*"],
+        "controllers/*": ["controllers/*"],
+        "lib/*": ["lib/*"],
+        "middleware/*": ["middleware/*"],
+        "models/*": ["models/*"],
+        "routes/*": ["routes/*"],
+        "schemas/*": ["schemas/*"],
+        "factories/*": ["factories/*"],
+        "utils/*": ["util/*"]
+      }
+    },
+    "exclude": ["node_modules", "dist"]
+}

@@ -8,7 +8,7 @@ class UserFactory {
   /* Return a user by email */
   async getUserByEmail( email ) {
     /* Attempt to get the user with the specified email address */
-    const user = await User.findOne({ email }).exec();
+    const user = await User.query().findOne({ email });
 
     /* If the user doesn't exist throw an error */
     if ( !user ) {
@@ -27,7 +27,7 @@ class UserFactory {
      * catch that specific error but it'll do for now.
      */
     try {
-      const user = await User.findOne({ _id: id }).exec();
+      const user = await User.query().findOne({ id });
 
       /* If the user doesn't exist throw an error */
       if ( !user ) {
@@ -46,22 +46,22 @@ class UserFactory {
 
   /* Returns the number of users */
   async getUserCount() {
-    return await User.count();
+    return await User.query().count();
   }
 
   /* Returns an array of all the users */
-  async getAllUsers( skip = 0, limit = 10 ) {
-    return await User.find({}).skip( skip ).limit( limit ).exec();
+  async getAllUsers( offset = 0, limit = 10 ) {
+    return await User.query().where({}).offset( offset ).limit( limit );
   }
 
   /* Find users */
-  async findUsers( query, skip = 0, limit = 10 ) {
-    return await User.find( query ).skip( skip ).limit( limit ).exec();
+  async findUsers( query, offset = 0, limit = 10 ) {
+    return await User.query().where( query ).offset( offset ).limit( limit );
   }
 
   /* Returns the number of users matching the provided query */
   async getUserFindCount( query ) {
-    return await User.find( query ).count();
+    return await User.query().where( query ).count();
   }
 
   /* Create the default users if they don't already exist */
@@ -76,8 +76,7 @@ class UserFactory {
         await this.getUserByEmail( user.email );
       } catch ( e ) {
         /* The user doesn't exist create a new one */
-        const newUser = new User( user );
-        await newUser.save();
+        await User.query().insert( user );
       }
     });
   }

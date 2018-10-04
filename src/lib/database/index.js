@@ -1,12 +1,12 @@
 /* Include dependencies */
 import config from 'config';
-import mongoose from 'mongoose';
+import knex from 'knex';
+import { Model, AjvValidator } from 'objection';
 
-/* Connect to the database */
-mongoose.connect( config.database.url );
+const database = knex( config.database );
 
-/* Define promise method */
-mongoose.Promise = global.Promise;
+Model.knex( database );
 
-/* Export the mongoose instance so it can be used easily */
-export default mongoose;
+/* Export the objection instance so it can be used easily */
+export default database;
+export { Model, AjvValidator };

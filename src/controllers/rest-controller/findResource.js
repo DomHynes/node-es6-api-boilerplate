@@ -1,12 +1,11 @@
 /* Include dependencies */
-import { UserFactory } from 'factories';
 import { requireFields, withinRange } from 'utils/validation';
 import { PAGINATION_MAX_USERS_LIMIT } from 'constants';
 
 /* Returns an array of all the users (pagination) */
-export default async ( req, res ) => {
+export default factory => async ( req, res ) => {
   /* Get the pagination parameters */
-  let { offset, limit } = req.query;
+  let { offset, limit, ...restQuery } = req.query;
 
   /* If either of the fields are missing throw an error */
   requireFields({ offset, limit });
@@ -20,11 +19,8 @@ export default async ( req, res ) => {
   withinRange({ limit }, 0, PAGINATION_MAX_USERS_LIMIT );
 
   /* Get the paginated users */
-  const users = await UserFactory.getAllUsers( offset, limit );
-
-  /* Get a count of all the users */
-  const count = await UserFactory.getUserCount();
+  const resources = await factory.findResources( restQuery, offset, limit );
 
   /* Returns the paginated users and the count of all users */
-  res.json({ users, count, offset, limit });
+  res.json({ resources, offset, limit });
 };

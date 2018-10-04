@@ -4,3 +4,4 @@ export * from './users';
 export * from './errors';
 export * from './auth';
 export * from './me';
+export * from './rest-controller';

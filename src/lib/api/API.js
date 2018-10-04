@@ -27,11 +27,6 @@ class API {
 
     /* Enable the user authentication middleware */
     this.app.use( userAuthentication );
-
-    /* Listen on the defined port */
-    this.app.listen( config.api.port, () => {
-      Logger.info( `${config.appName} is now listening on ${config.api.port}` );
-    });
   }
 
   /**
@@ -41,6 +36,13 @@ class API {
   enableErrorHandler() {
     /* Create an error handler */
     this.app.use( ErrorHandler );
+  }
+
+  start() {
+    /* Listen on the defined port */
+    this.app.listen( config.api.port, () => {
+      Logger.info( `${config.appName} is now listening on ${config.api.port}` );
+    });
   }
 
   /* Registers a route on the API */

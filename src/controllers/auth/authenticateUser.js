@@ -17,5 +17,5 @@ export default async ( req, res ) => {
 
   /* Generate and return an authentication token */
   const token = user.generateToken();
-  res.json({ token, user: user.toJSON() });
+  res.json({ token, user });
 };

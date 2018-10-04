@@ -1,23 +1,23 @@
 {
-  "name": "node-es6-api-boilerplate",
+  "name": "node-es6-api-boilerplate-objection",
   "version": "1.0.0",
-  "description": "NodeJS ES6 API Boilerplate",
+  "description": "NodeJS ES6 API Boilerplate, now with 100% more SQL",
   "main": "index.js",
   "scripts": {
     "start": "node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rimraf dist/ && babel ./src --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
-    "dev": "nodemon --ignore dist/ --exec babel-node -- ./src/index.js",
+    "dev": "export $(cat .env) && nodemon --ignore dist/ --exec babel-node -- ./src/index.js",
     "eslint": "eslint ."
   },
-  "author": "Matt Hayward",
+  "author": "Dom Hynes",
   "license": "MIT",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.2",
     "babel-plugin-module-resolver": "^3.1.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-env": "^1.7.0",
     "eslint": "^4.19.1",
     "eslint-plugin-babel": "^4.1.2",
     "eslint-plugin-flowtype": "^2.46.1",
@@ -31,7 +31,12 @@
     "express": "^4.16.3",
     "isemail": "^3.1.1",
     "jsonwebtoken": "^8.2.0",
-    "mongoose": "^5.0.12",
+    "knex": "^0.15.2",
+    "mysql": "^2.16.0",
+    "objection": "^1.3.0",
+    "objection-guid": "^3.0.2",
+    "objection-password": "^2.0.0",
+    "source-map-support": "^0.5.9",
     "winston": "3.0.0-rc0"
   }
 }

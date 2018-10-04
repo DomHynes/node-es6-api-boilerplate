@@ -49,17 +49,13 @@ export default async ( req, res ) => {
   }
 
   /* The user doesn't exist. We can create a new one */
-  const user = new User({ firstName, lastName, email, password, type, companyName, signupSource });
-
-  /* Save the user in the database */
-  await user.save();
+  const user = await User.query().insert({ firstName, lastName, email, password, type, companyName, signupSource });
 
   /* Create a new authentication token for the user */
   const token = user.generateToken();
 
   /* Return the new user */
   res.json({
-    user: user.toJSON(),
-    token,
+    user, token,
   });
 };
